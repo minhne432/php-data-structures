@@ -2,23 +2,20 @@
 require './Node.php';
 
 
-class LinkedList {
+class LinkedList
+{
     private $head;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->head = null;
     }
 
-    public function getFirst()  {
-        
-        if($this->head !== null){
-            return $this->head->data;
-        }
-            return 'List is empty!';
-    }
+
 
     //add new Node to the list
-    public function append($data) {
+    public function append($data)
+    {
         $newNode = new Node($data);
 
         if ($this->head == null) {      //Checks if the linked list is empty.
@@ -34,32 +31,34 @@ class LinkedList {
         $current->next = $newNode;
     }
 
-    public function remove($data){
+    public function remove($data)
+    {
 
         //case 1;
-        if($this->head === null){
+        if ($this->head === null) {
             return;
         }
 
         //case 2;
-        if($this->head->data === $data){
+        if ($this->head->data === $data) {
             $this->head = $this->head->next;
             return;
         }
 
         //case 3;
         $current = $this->head;
-        while($current->next !== null && $current->next->data === $data){
+        while ($current->next !== null && $current->next->data === $data) {
             $current = $current->next;
         }
-        
+
         $current->next = $current->next->next;
     }
 
 
-    public function display(){
+    public function display()
+    {
         $current = $this->head;
-        while($current !== null){
+        while ($current !== null) {
             echo $current->data . "->";
             $current = $current->next;
         }
@@ -67,10 +66,11 @@ class LinkedList {
         echo "null\n";
     }
 
-    public function length(){
+    public function length()
+    {
         $count = 0;
         $current = $this->head;
-        while($current != null){
+        while ($current != null) {
             $count++;
             $current = $current->next;
         }
@@ -78,10 +78,11 @@ class LinkedList {
         return $count;
     }
 
-    public function find($data){
+    public function find($data)
+    {
         $current = $this->head;
-        while($current !== null){
-            if($current->data === $data){
+        while ($current !== null) {
+            if ($current->data === $data) {
                 return $current;
             }
             $current = $current->next;
@@ -92,4 +93,20 @@ class LinkedList {
     }
 
 
+
+    public function getFirst()
+    {
+        if ($this->head !== null) {
+            return $this->head->data;
+        }
+
+        return null;
+    }
+
+    public function moveToNext()
+    {
+        if ($this->head !== null && $this->head->next !== null) {
+            $this->head = $this->head->next;
+        }
+    }
 }
