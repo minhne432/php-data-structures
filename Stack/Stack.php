@@ -14,14 +14,6 @@ class Stack
         $this->limit = $limit;
     }
 
-    public function isEmpty()
-    {
-        if (count($this->stack) > 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
 
     //add an item to the stack
     public function push($item)
@@ -41,5 +33,33 @@ class Stack
         } else {
             return array_pop($this->stack);
         }
+    }
+
+    //return the top item whithou removing it.
+    public function peek()
+    {
+        return end($this->stack);
+    }
+
+    //check if the stack is Empty
+    public function isEmpty()
+    {
+        if (count($this->stack) > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //get the current size of the stack
+    public function size()
+    {
+        return count($this->stack);
+    }
+
+    //Display the stack
+    public function display()
+    {
+        return implode(", ", $this->stack);
     }
 }
