@@ -1,6 +1,6 @@
 <?php
-require './Node.php';
 
+require_once './Node.php';
 
 class LinkedList
 {
@@ -11,66 +11,74 @@ class LinkedList
         $this->head = null;
     }
 
-
-
-    //add new Node to the list
+    //add new Node the the list
     public function append($data)
     {
         $newNode = new Node($data);
 
-        if ($this->head == null) {      //Checks if the linked list is empty.
-            $this->head = $newNode;     // If the list is empty, sets the $head property to the new node, making it the first node in the list.
+        // checks if the linked list is empty
+        if ($this->head == null) {
+            //if the list is empty, sets the $head property to the new node
+            // making it the first node in the list.
+            $this->head = $newNode;
             return;
         }
 
         $current = $this->head;
+
         while ($current->next !== null) {
-            $current = $current->next;  // Corrected typo
+            $current = $current->next;
         }
 
         $current->next = $newNode;
     }
 
+
     public function remove($data)
     {
-
-        //case 1;
+        //case1;
+        //check if the list is emtpy
         if ($this->head === null) {
             return;
         }
 
-        //case 2;
+        //case2;
         if ($this->head->data === $data) {
             $this->head = $this->head->next;
             return;
         }
 
-        //case 3;
+        //case3;
         $current = $this->head;
-        while ($current->next !== null && $current->next->data === $data) {
+        while ($current->next !== null && $current->next->data !== $data) {
             $current = $current->next;
+        }
+
+        if ($current->next === null) {
+            return;
         }
 
         $current->next = $current->next->next;
     }
 
-
+    //Display the linkedlist
     public function display()
     {
         $current = $this->head;
         while ($current !== null) {
-            echo $current->data . "->";
+            echo "$current->data ->";
             $current = $current->next;
         }
-
-        echo "null\n";
+        echo "\n";
     }
 
+
+    //get the length of the linkedlist
     public function length()
     {
         $count = 0;
         $current = $this->head;
-        while ($current != null) {
+        while ($current !== null) {
             $count++;
             $current = $current->next;
         }
@@ -78,6 +86,7 @@ class LinkedList
         return $count;
     }
 
+    //findd a node by value
     public function find($data)
     {
         $current = $this->head;
@@ -86,18 +95,6 @@ class LinkedList
                 return $current;
             }
             $current = $current->next;
-        }
-
-        //null is returned when $current === null and ($current->data === $data) expression  is allway flase.
-        return null;
-    }
-
-
-
-    public function getFirst()
-    {
-        if ($this->head !== null) {
-            return $this->head->data;
         }
 
         return null;
